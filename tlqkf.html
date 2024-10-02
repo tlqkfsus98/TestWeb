@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물품 대여</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // 폼 제출 방지
+
+            // 임의의 배정 번호 생성
+             assignmentNumber = Math.floor(Math.random() * 1000) + 1;
+             assignmentNumber = 3;
+
+            // 새로운 창 열기
+            const newWindow = window.open("", "_blank", "width=400,height=300");
+
+            // 새로운 창에 내용 삽입
+            newWindow.document.write(`
+                <html>
+                <head>
+                    <title>배정 완료</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            margin: 0;
+                            background-color: #f9f9f9;
+                        }
+                        .message {
+                            text-align: center;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="message">
+                        <h2>배정된 공은  ${assignmentNumber}번입니다.</h2>
+                        <p>성공적으로 물품 대여가 완료되었습니다.</p>
+                        <p>사용 후 반납 안하면 찾아갑니다.</p>
+                    </div>
+                </body>
+                </html>
+            `);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>물품 대여</h2>
+        <form onsubmit="submitForm(event)">
+            <label for="student_id">학번:</label>
+            <input type="text" id="student_id" name="student_id" required>
+
+            <label for="phone">전화번호:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678" required>
+
+            <label for="course">종목:</label>
+            <select id="course" name="course" required>
+                <option value="">종목을 선택하세요</option>
+                <option value="soccer">축구공</option>
+                <option value="baseball">야구공</option>
+                <option value="basketball">농구공</option>
+                <option value="tennis">테니스</option>
+            </select>
+
+            <label for="comments">추가 요청 사항:</label>
+            <input type="text" id="comments" name="comments">
+
+            <button type="submit">제출</button>
+        </form>
+    </div>
+</body>
+</html>
